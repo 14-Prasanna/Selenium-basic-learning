@@ -17,10 +17,10 @@ public class FlipkartDemo {
 		String title = driver.getTitle();
 		System.out.println("page title is :"+ title +"Title length :"+title.length());
 		
-		//System.out.println("page current url is :"+driver.getCurrentUrl());
+		System.out.println("page current url is :"+driver.getCurrentUrl());
 		
-//		String page = driver.getPageSource();
-//		System.out.println("page page source is :"+ page +"Page length :"+ page.length());
+		String page = driver.getPageSource();
+		System.out.println("page page source is :"+ page +"Page length :"+ page.length());
 		
 		driver.close();
 	}

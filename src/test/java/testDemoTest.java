@@ -1,7 +1,6 @@
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeOptions;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.junit.jupiter.api.Test;
 
 public class testDemoTest {
@@ -9,11 +8,15 @@ public class testDemoTest {
     @Test
     void testFlipkartTitle() {
 
-        EdgeOptions options = new EdgeOptions();
-        options.addArguments("--headless=new"); // important for Jenkins
-        options.addArguments("--disable-gpu");
+        ChromeOptions options = new ChromeOptions();
 
-        WebDriver driver = new EdgeDriver(options);
+        // Required for Jenkins (VERY IMPORTANT)
+        options.addArguments("--headless=new");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+
+        WebDriver driver = new ChromeDriver(options);
 
         driver.manage().window().maximize();
         driver.get("https://www.flipkart.com/");

@@ -1,6 +1,9 @@
 package Selenium_Main;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 public class FlipkartDemo {
@@ -10,6 +13,9 @@ public class FlipkartDemo {
 
         driver.manage().window().maximize();
         driver.get("https://www.flipkart.com/");
+        
+        WebElement search = driver.findElement(By.className(null));
+        search.sendKeys("samsung a35 phone cover", Keys.ENTER);
 
         String title = driver.getTitle();
         System.out.println("Page title is: " + title + " | Title length: " + title.length());
@@ -19,6 +25,6 @@ public class FlipkartDemo {
         String page = driver.getPageSource();
         System.out.println("Page length: " + page.length());
 
-        driver.quit(); // better than close()
+        //driver.quit(); // better than close()
     }
 }

@@ -24,22 +24,16 @@ public class Self {
 
         // Firefox Options
         FirefoxOptions options = new FirefoxOptions();
-        options.addArguments("--headless");      // Headless Mode
-        options.addArguments("--width=1920");    // Screen width
-        options.addArguments("--height=1080");   // Screen height
+        // options.addArguments("--headless");   // Removed headless
+        options.addArguments("--width=1920");
+        options.addArguments("--height=1080");
 
         WebDriver driver = new FirefoxDriver(options);
 
-        // Explicit wait
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-
-        // Action
         Actions action = new Actions(driver);
-
-        // JS
         JavascriptExecutor js = (JavascriptExecutor) driver;
 
-        // URL of the application
         driver.get("https://demoblaze.com/");
 
         // ---------------- Question 1 Login ----------------
@@ -92,8 +86,7 @@ public class Self {
         WebElement macBook = driver.findElement(By.xpath("//a[text()='MacBook Pro']"));
         js.executeScript("arguments[0].scrollIntoView(true);", macBook);
 
-        String exp = macBook.getText();
-        if (exp.equals("MacBook Pro")) {
+        if (macBook.getText().equals("MacBook Pro")) {
             System.out.println("The MacBook Pro is found");
         }
 
@@ -107,12 +100,10 @@ public class Self {
         WebElement addToCartBtn = driver.findElement(By.xpath("//a[text()='Add to cart']"));
         addToCartBtn.click();
 
-        // Alert Handling
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.accept();
         System.out.println("Alert handled successfully.");
 
-        System.out.println("Product added to cart");
         System.out.println("MacBook Pro added to cart.");
 
         WebElement cart = driver.findElement(By.xpath("//a[@id='cartur']"));
@@ -164,7 +155,6 @@ public class Self {
             System.out.println("Order is placed successfully");
 
             String[] detail = pur.split("\n");
-
             for (String line : detail) {
                 if (line.contains("Id:") || line.contains("Amount:") || line.contains("Date:")) {
                     System.out.println(line);

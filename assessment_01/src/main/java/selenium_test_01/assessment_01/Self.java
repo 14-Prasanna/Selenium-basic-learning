@@ -11,9 +11,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -21,11 +22,13 @@ public class Self {
 
     public static void main(String[] args) {
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        // options.addArguments("--headless"); // optional
+        // Firefox Options
+        FirefoxOptions options = new FirefoxOptions();
+        options.addArguments("--headless");      // Headless Mode
+        options.addArguments("--width=1920");    // Screen width
+        options.addArguments("--height=1080");   // Screen height
 
-        WebDriver driver = new ChromeDriver(options);
+        WebDriver driver = new FirefoxDriver(options);
 
         // Explicit wait
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
@@ -41,11 +44,10 @@ public class Self {
 
         // ---------------- Question 1 Login ----------------
 
-        driver.findElement(By.id("login2")).click();
+        wait.until(ExpectedConditions.elementToBeClickable(By.id("login2"))).click();
 
         WebElement username = wait.until(
                 ExpectedConditions.visibilityOfElementLocated(By.cssSelector("#loginusername")));
-
         username.sendKeys("admin");
 
         WebElement pass = driver.findElement(By.cssSelector("#loginpassword"));
@@ -91,7 +93,6 @@ public class Self {
         js.executeScript("arguments[0].scrollIntoView(true);", macBook);
 
         String exp = macBook.getText();
-
         if (exp.equals("MacBook Pro")) {
             System.out.println("The MacBook Pro is found");
         }
@@ -107,8 +108,8 @@ public class Self {
         addToCartBtn.click();
 
         // Alert Handling
-        wait.until(ExpectedConditions.alertIsPresent());
-        driver.switchTo().alert().accept();
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        alert.accept();
         System.out.println("Alert handled successfully.");
 
         System.out.println("Product added to cart");
